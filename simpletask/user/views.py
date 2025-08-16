@@ -1,15 +1,21 @@
-from django.shortcuts import get_object_or_404
-
-from rest_framework.views import APIView
+from rest_framework import viewsets, permissions
 from rest_framework.response import Response
-from rest_framework.request import Request
+from rest_framework import status
 
 from user.models import User
-from user.serializer import UserSerializer
+from user.serializers import UserReadUpdateSerializer, UserCreateSerializer
+from user.permissions import IsOwnerOrReadOnly
 
 
-class UserView(APIView):
-    def get(self, request, pk):
-        user = get_object_or_404(User, pk=pk)
-        serialized = UserSerializer(user)
-        return Response({'user': serialized.data})
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [permissions.AllowAny()]
+        return [IsOwnerOrReadOnly()]
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return UserCreateSerializer
+        return UserReadUpdateSerializer
