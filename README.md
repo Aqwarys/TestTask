@@ -7,7 +7,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.12.4-blue.svg)
 ![Django](https://img.shields.io/badge/Django-5.2.5-green.svg)
-![DRF](https://img.shields.io/badge/DRF-3.x-orange.svg)
+![DRF](https://img.shields.io/badge/DRF-3.16.1-orange.svg)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue.svg)
 ![Docker](https://img.shields.io/badge/Docker-Compose-blue.svg)
 
