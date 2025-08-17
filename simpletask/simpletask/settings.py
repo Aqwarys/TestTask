@@ -1,6 +1,11 @@
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 SECRET_KEY = 'django-insecure-u&a+j@xssra4sq%!dk49i_0mjfnq6rl+m@imtg7zen#0vq&y_1'
 
@@ -57,13 +62,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'simpletask.wsgi.application'
 
+import dj_database_url
+
+DATABASE_URI = os.getenv('DATABASE_URI')
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(DATABASE_URI, conn_max_age=600)
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 
